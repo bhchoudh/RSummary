@@ -1,21 +1,4 @@
-### Apriori & Market basket analysis
-library(arules)
-library(arulesViz)
-## Load file as transaction not dataframe
-ts <- read.transactions("c:/BhaskarCode/groceries.csv")
-rules <- apriori(ts,parameter = list(conf =.5, supp=.01))
-rules<-sort(rules,by = "lift")
-inspect(rules)
-summary(rules)
-plot(rules)
-## rules involving a specific items in basket
-rules <- apriori(ts,parameter = list(conf =.5, supp=.001), appearance = list(lhs="citrus"))
-rules<-sort(rules,by = "lift")
-inspect(rules)
-##################################
-
-
-###### Clustering 
+###### Clustering ############ 
 library(stats)
 library(cluster)
 ## K-means Clustering
@@ -51,7 +34,22 @@ clustgroup <-cutree (clust,5)
 plot(clustgroup)
 
 
-## Time Series 
+###### Clustering for Digital Literacy paper######
+library(stats)
+library(cluster)
+## K-means Clustering
+df <- read.csv("d:/BhaskarCode/Journal/DigLitCosinePlot.csv")
+## Example 1 - creating new DF with specific columns
+df1 <- data.frame(df$Profile,df$Rating)
+km <- kmeans(df, 3)
+plot(df$Rating~df$Profile,df, col=km$cluster)
+plot(df.Rating~df.Profile,df1, col=km$cluster)
+plot (df,col=km$cluster)
+clusplot(df, km$cluster, frame=TRUE , color = TRUE, shade = TRUE)
+
+
+
+######### Time Series ###########
 install.packages("forecast")
 library(forecast)
 df <- read.csv("c:/BhaskarCode/GDPTS.csv")
@@ -67,4 +65,21 @@ accuracy(arimafit)
 acf(fcast$residuals)
 pacf(fcast$residuals)
 qqnorm(fcast$residuals)
+
+
+### Apriori & Market basket analysis ######
+library(arules)
+library(arulesViz)
+## Load file as transaction not dataframe
+ts <- read.transactions("c:/BhaskarCode/groceries.csv")
+rules <- apriori(ts,parameter = list(conf =.5, supp=.01))
+rules<-sort(rules,by = "lift")
+inspect(rules)
+summary(rules)
+plot(rules)
+## rules involving a specific items in basket
+rules <- apriori(ts,parameter = list(conf =.5, supp=.001), appearance = list(lhs="citrus"))
+rules<-sort(rules,by = "lift")
+inspect(rules)
+##################################
 

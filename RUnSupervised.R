@@ -2,7 +2,7 @@
 library(stats)
 library(cluster)
 ## K-means Clustering
-df <- read.csv("c:/BhaskarCode/admission.csv")
+df <- read.csv("d:/BhaskarCode/admission.csv")
 df <- read.csv("c:/BhaskarCode/winequalitydecision.csv")
 df <- read.csv("c:/BhaskarCode/Universities_Clustering.csv")
 ## Example 1 - creating new DF with specific columns
@@ -38,7 +38,7 @@ plot(clustgroup)
 library(stats)
 library(cluster)
 ## K-means Clustering
-df <- read.csv("d:/BhaskarCode/Journal/DigLitCosinePlot.csv")
+df <- read.csv("d:/BhaskarCode/Journal/RankCosine3007.csv")
 ## Example 1 - creating new DF with specific columns
 df1 <- data.frame(df$Profile,df$Rating)
 km <- kmeans(df, 3)

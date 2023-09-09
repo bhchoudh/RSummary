@@ -1,6 +1,6 @@
 #Sentiment Analysis
 library(syuzhet)
-##library(dplyr)
+library(dplyr)
 
 ##overall Sentiment by  by lines from document  
 textline <- readLines("C:/BhaskarCode/Demonetisation_Sentiment.txt")
@@ -95,17 +95,31 @@ p
 dark2 <- brewer.pal(6, "Dark2")
 wordcloud(names(freq_new), freq_new, max.words = 100, rot.per = 0.20, colors = dark2)
 
-## Cosine similarity
-l1 <-strsplit("i like to write code in java", " ")
-l2 <-strsplit("i like to write code in python", " ")
+#9/9/23
+#Cosine using textTinyR package 
+install.packages("textTinyR")
+library(textTinyR)
+text1 <- "i like to write code in python"
+text2 <- "java is a better language than python"
+COS_TEXT(text_vector1 = text1, text_vector2 = text2, separator = " ")
+
+#Cosine using lsa package
+installed.packages("lsa")
+library(lsa)
+
+# Cosine Option 1 with single matrix
 c1 <- c("i like to write code in java")
 c2 <- c("i like to write code in python")
 vec <- cbind(c1, c2)
 veccorp <-VCorpus(VectorSource(vec))
+dtm <- DocumentTermMatrix(veccorp)
+vecmat <- as.matrix(dtm)
+cosine(vecmat)
 
+## Cosine option2 with 2 vector - not working
+l1 <-strsplit("i like to write code in java", " ")
+l2 <-strsplit("i like to write code in python", " ")
 dtm <- DocumentTermMatrix(veccorp)
 dtm1 <- DocumentTermMatrix(VCorpus(VectorSource(l1)))
 dtm2 <- DocumentTermMatrix(VCorpus(VectorSource(l2)))
-vecmat <- as.matrix(dtm)
-cosine(vecmat)
 cosine(dtm1, dtm2)
